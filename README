@@ -1,0 +1,16 @@
+README
+======
+
+INFO:
+This is a BlackMesa Disaster Recovery system to be used with VMware Data
+Recovery Appliances (VMware DARE aka
+https://www.vmware.com/pdf/vdr_10_admin.pdf).  The basic idea is to
+synchronise DARE exports from one set of appliances to other set of
+appliances, wherever they might be.
+
+To do so, we need an inteligent inotify listener and rsync wraper (lsyncd
+wasn't exactly what we were looking for) which can handle sparse-file
+changes that VMware DARE does and checksums the files before transferring,
+to make sure it makes sense to transfer at all (as DARE appliances are
+known to change bytes in files but content can remain the same in the
+end), including transfer queues with IO throttling.
